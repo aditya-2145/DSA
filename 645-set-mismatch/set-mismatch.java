@@ -1,16 +1,16 @@
 class Solution {
     public int[] findErrorNums(int[] nums) {
-        Set<Integer> set = new HashSet<>();
-        int n=nums.length;
-        int oldSum=n*(n+1)/2;
-        int newSum=0;
-        int doub=0;
-        for(int i:nums){
-            newSum+=i;
-            if(set.contains(i)) doub=i;
-            else set.add(i);
+        int n= nums.length;
+        int[] freq = new int[n+1];
+        int mis = -1;
+        int dou = -1;
+        for(int num : nums){
+            freq[num]++;
         }
-        int missing=oldSum-newSum+doub;
-        return new int[]{doub,missing};
+        for(int i=1 ; i<=n ; i++){
+            if(freq[i]==2) dou=i;
+            if(freq[i]==0) mis=i;
+        }
+        return new int[]{dou, mis};
     }
 }
